@@ -31,5 +31,40 @@ namespace AlgorithmsPractice.Lists
                 node = node.Next;
             }
         }
+
+        public static void RemoveDuplicatesTwoPointers<T>(LinkedListNode<T> head) where T : IEquatable<T>
+        {
+            if(head == null)
+            {
+                return;
+            }
+
+            var previous = head;
+            var current = previous.Next;
+
+            while(current != null)
+            {
+                var runner = head;
+
+                while(runner != current)
+                {
+                    if(runner.Value.Equals(current.Value))
+                    {
+                        var temp = current.Next;
+                        previous.Next = temp;
+                        current = temp;
+                        break;
+                    }
+
+                    runner = runner.Next;
+                }
+
+                if(runner == current)
+                {
+                    previous = current;
+                    current = current.Next;
+                }
+            }
+        }
     }
 }
