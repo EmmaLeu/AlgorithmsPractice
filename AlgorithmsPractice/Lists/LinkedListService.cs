@@ -66,5 +66,34 @@ namespace AlgorithmsPractice.Lists
                 }
             }
         }
+
+        public static LinkedListNode<T> FindNthToLastElement<T>(LinkedListNode<T> head, int n) where T: IEquatable<T>
+        {
+            if (head == null || n < 1)
+            {
+                return null;
+            }
+
+            var p1 = head;
+            var p2 = head;
+
+            for(var index = 0; index < n - 1; ++index)
+            {
+                if(p2 == null)
+                {
+                    return null;
+                }
+
+                p2 = p2.Next;
+            }
+
+            while(p2.Next != null)
+            {
+                p1 = p1.Next;
+                p2 = p2.Next;
+            }
+
+            return p1;
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace AlgorithmsPractice.Lists
 
             for (var index = 1; index < values.Length ; index++)
             {
-                head.Next = new LinkedListNode<T>(values[index++]);
+                head.Next = new LinkedListNode<T>(values[index]);
                 head = head.Next;
             }
         }

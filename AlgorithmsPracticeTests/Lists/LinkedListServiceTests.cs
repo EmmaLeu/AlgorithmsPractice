@@ -54,5 +54,15 @@ namespace AlgorithmsPracticeTests.Lists
                 values.Contains(value);
             }
         }
+
+        [Test]
+        public void FindNthToLastElement_Int_Test()
+        {
+            var head = new AlgorithmsPractice.Lists.LinkedListNode<int>(1, 2, 3, 4, 5, 6, 7);
+
+            var nthToLast = LinkedListService.FindNthToLastElement<int>(head, 3);
+
+            Assert.AreEqual(5, nthToLast.Value);
+        }
     }
 }
