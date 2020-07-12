@@ -95,5 +95,19 @@ namespace AlgorithmsPractice.Lists
 
             return p1;
         }
+
+        public static bool DeleteNode<T>(LinkedListNode<T> node) where T : IEquatable<T>
+        {
+            if (node == null || node.Next == null)
+            {
+                return false;
+            }
+
+            var next = node.Next;
+            node.Value = next.Value;
+            node.Next = next.Next;
+
+            return true;
+        }
     }
 }

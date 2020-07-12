@@ -64,5 +64,47 @@ namespace AlgorithmsPracticeTests.Lists
 
             Assert.AreEqual(5, nthToLast.Value);
         }
+
+        [Test]
+        public void DeleteNode_IntLast_Test()
+        {
+            var head = new AlgorithmsPractice.Lists.LinkedListNode<int>(1);
+            var next = new AlgorithmsPractice.Lists.LinkedListNode<int>(2);
+            head.Next = next;
+
+            var result = LinkedListService.DeleteNode<int>(next);
+
+            Assert.AreEqual(false, result);
+        }
+
+        [Test]
+        public void DeletNode_IntNull_Test()
+        {
+            var head = new AlgorithmsPractice.Lists.LinkedListNode<int>(1);
+            var next = new AlgorithmsPractice.Lists.LinkedListNode<int>(2);
+            head.Next = next;
+
+            var result = LinkedListService.DeleteNode<int>(next);
+
+            Assert.AreEqual(false, result);
+        }
+
+        [Test]
+        public void DeleteNode_IntMiddle_Test()
+        {
+            var head = new AlgorithmsPractice.Lists.LinkedListNode<int>(1);
+            var middle = new AlgorithmsPractice.Lists.LinkedListNode<int>(2);
+            var last = new AlgorithmsPractice.Lists.LinkedListNode<int>(3);
+
+            head.Next = middle;
+            middle.Next = last;
+
+            var result = LinkedListService.DeleteNode<int>(middle);
+
+            Assert.AreEqual(true, result);
+            Assert.AreEqual(head.Next, middle);
+            Assert.AreEqual(3, head.Next.Value);
+            Assert.IsNull(middle.Next);
+        }
     }
 }
