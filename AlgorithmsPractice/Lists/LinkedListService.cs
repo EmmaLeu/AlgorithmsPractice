@@ -109,5 +109,44 @@ namespace AlgorithmsPractice.Lists
 
             return true;
         }
+
+        /// <summary>
+        /// Add 2 numbers having each digit in a node
+        /// Last digit in number is head of the list
+        /// </summary>
+        /// <param name="n1"></param>
+        /// <param name="n2"></param>
+        /// <returns></returns>
+        public static LinkedListNode<int> AddNodes(LinkedListNode<int> n1, LinkedListNode<int> n2, int carry)
+        {
+            if(n1 == null || n2 == null)
+            {
+                return null;
+            }
+
+            var result = new LinkedListNode<int>(carry);
+
+            var value = carry;
+
+            if(n1 != null)
+            {
+                value += n1.Value;
+            }
+
+            if(n2 != null)
+            {
+                value += n2.Value;
+            }
+
+            result.Value = value % 10;
+
+            var next = AddNodes(n1 == null ? null : n1.Next,
+                n2 == null ? null : n2.Next,
+                value > 10 ? 1 : 0);
+
+            result.Next = next;
+
+            return result;
+        }
     }
 }

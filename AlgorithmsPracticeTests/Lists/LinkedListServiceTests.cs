@@ -1,5 +1,6 @@
 ﻿using AlgorithmsPractice.Lists;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -105,6 +106,50 @@ namespace AlgorithmsPracticeTests.Lists
             Assert.AreEqual(head.Next, middle);
             Assert.AreEqual(3, head.Next.Value);
             Assert.IsNull(middle.Next);
+        }
+
+        [Test]
+        public void AddNodes_EqualLength_Test()
+        {
+            var firstNumber = new AlgorithmsPractice.Lists.LinkedListNode<int>(3, 1, 5);
+            var secondNumber = new AlgorithmsPractice.Lists.LinkedListNode<int>(5, 9, 2);
+
+            var result = LinkedListService.AddNodes(firstNumber, secondNumber, 0);
+
+            AreEqual(new AlgorithmsPractice.Lists.LinkedListNode<int>(8, 0, 8), result);
+        }
+
+
+        [Test]
+        public void AddNodes_DiffrentLength_Test()
+        {
+            var firstNumber = new AlgorithmsPractice.Lists.LinkedListNode<int>(3, 1, 5);
+            var secondNumber = new AlgorithmsPractice.Lists.LinkedListNode<int>(5, 9, 2, 7);
+
+            var result = LinkedListService.AddNodes(firstNumber, secondNumber, 0);
+
+            AreEqual(new AlgorithmsPractice.Lists.LinkedListNode<int>(5, 2, 4, 2, 1), result);
+        }
+
+        private bool AreEqual<T>(AlgorithmsPractice.Lists.LinkedListNode<T> firstList, AlgorithmsPractice.Lists.LinkedListNode<T> secondList) where T : IEquatable<T>
+        {
+            while (firstList != null && secondList != null)
+            {
+                if (!firstList.Value.Equals(secondList.Value))
+                {
+                    return false;
+                }
+
+                firstList = firstList.Next;
+                secondList = secondList.Next;
+            }
+
+            if(firstList != null || secondList != null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
