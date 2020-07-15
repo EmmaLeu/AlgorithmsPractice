@@ -131,6 +131,37 @@ namespace AlgorithmsPracticeTests.Lists
             AreEqual(new AlgorithmsPractice.Lists.LinkedListNode<int>(5, 2, 4, 2, 1), result);
         }
 
+
+        [Test]
+        public void GetLoopStart_Circular_Test()
+        {
+            var head = new AlgorithmsPractice.Lists.LinkedListNode<int>(3);
+
+            var circularList = head;
+            circularList.Next = new AlgorithmsPractice.Lists.LinkedListNode<int>(3);
+            circularList = circularList.Next;
+            var loopStart = new AlgorithmsPractice.Lists.LinkedListNode<int>(3);
+            circularList.Next = loopStart;
+            circularList = circularList.Next;
+            circularList.Next = new AlgorithmsPractice.Lists.LinkedListNode<int>(3);
+            circularList = circularList.Next;
+            circularList.Next = loopStart;
+
+            var result = LinkedListService.GetLoopStart(head);
+
+            Assert.AreEqual(loopStart, result);
+        }
+
+        [Test]
+        public void GetLoopStart_NonCircular_Test()
+        {
+            var head = new AlgorithmsPractice.Lists.LinkedListNode<int>(3);
+
+            var result = LinkedListService.GetLoopStart(head);
+
+            Assert.Null(result);
+        }
+
         private bool AreEqual<T>(AlgorithmsPractice.Lists.LinkedListNode<T> firstList, AlgorithmsPractice.Lists.LinkedListNode<T> secondList) where T : IEquatable<T>
         {
             while (firstList != null && secondList != null)

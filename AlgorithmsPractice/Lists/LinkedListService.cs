@@ -148,5 +148,49 @@ namespace AlgorithmsPractice.Lists
 
             return result;
         }
+
+        public static LinkedListNode<T> GetLoopStart<T>(LinkedListNode<T> head) where T: IEquatable<T>
+        {
+            if(head == null)
+            {
+                return null;
+            }
+
+            var slowNode = head;
+            var fastNode = head;
+
+            while(fastNode.Next != null)
+            {
+                slowNode = slowNode.Next;
+                fastNode = fastNode.Next.Next;
+                if(slowNode == fastNode)
+                {
+                    //meeting point determined; k steps before the beginning of the next loop,
+                    //where k is the distance between head and loop start
+                    break;
+                }
+            }
+
+            if(fastNode.Next == null)
+            {
+                //there is no meeting point
+                return null;
+            }
+
+            //keep one node at head; this node will make k steps until the loop start
+            var samePaceNode1 = head;
+
+            //keep the other node at meeting point; this node will make k steps until loop start
+            var samePaceNode2 = fastNode;
+            
+            while(samePaceNode1 != samePaceNode2) 
+            {
+                samePaceNode1 = samePaceNode1.Next;
+                samePaceNode2 = samePaceNode2.Next;
+            }
+
+            //loop start
+            return samePaceNode2;
+        }
     }
 }
