@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace AlgorithmsPractice
+namespace AlgorithmsPractice.ArraysAndStrings
 {
     /// <summary>
     /// Assuming we have only alphanumeric characters with ASCII between 0..255
@@ -12,17 +12,17 @@ namespace AlgorithmsPractice
         //O(nlogn) complexity because of sorting
         public static bool AreAnagrams_Sorting(string firstString, string secondString)
         {
-            if(string.IsNullOrEmpty(firstString) && string.IsNullOrEmpty(secondString))
+            if (string.IsNullOrEmpty(firstString) && string.IsNullOrEmpty(secondString))
             {
                 return true;
             }
 
-            if(firstString == null || secondString == null)
+            if (firstString == null || secondString == null)
             {
                 return false;
             }
 
-            if(firstString.Length != secondString.Length)
+            if (firstString.Length != secondString.Length)
             {
                 return false;
             }
@@ -34,7 +34,7 @@ namespace AlgorithmsPractice
             {
                 return true;
             }
-            
+
             return false;
         }
 
@@ -58,19 +58,19 @@ namespace AlgorithmsPractice
 
             var frequencyArray = new int[256];
 
-            foreach(var character in firstString)
+            foreach (var character in firstString)
             {
-                 frequencyArray[char.ToLower(character)]++;
+                frequencyArray[char.ToLower(character)]++;
             }
-            
-            foreach(var character in secondString)
+
+            foreach (var character in secondString)
             {
                 frequencyArray[char.ToLower(character)]--;
             }
 
-            foreach(var character in frequencyArray)
+            foreach (var character in frequencyArray)
             {
-                if(character != 0)
+                if (character != 0)
                 {
                     return false;
                 }

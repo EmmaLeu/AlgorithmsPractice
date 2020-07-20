@@ -1,7 +1,7 @@
-﻿using AlgorithmsPractice;
+﻿using AlgorithmsPractice.ArraysAndStrings;
 using NUnit.Framework;
 
-namespace AlgorithmsPracticeTests
+namespace AlgorithmsPracticeTests.ArraysAndStrings
 {
     public class AnagramDetectionServiceTests
     {
