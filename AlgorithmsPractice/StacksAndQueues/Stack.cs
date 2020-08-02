@@ -20,11 +20,30 @@ namespace AlgorithmsPractice.StacksAndQueues
             return default;
         }
 
+        public T Peek()
+        {
+            if (_top != null)
+            {
+                return _top.Value;
+            }
+            return default;
+        }
+
         public void Push(T item)
         {
             var newTop = new LinkedListNode<T>(item);
             newTop.Next = _top;
             _top = newTop;
+        }
+
+        public bool IsEmpty()
+        {
+            if(_top == null)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
