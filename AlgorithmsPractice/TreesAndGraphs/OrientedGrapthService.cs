@@ -28,6 +28,40 @@ namespace AlgorithmsPractice.TreesAndGraphs
             _adjacencyList[fromVertex].Add(toVertex);
         }
 
+        public bool AreConnected(int start, int end)
+        {
+            return DepthFirstSearch(start).Contains(end);
+        }
+
+        public bool AreConnectedOptimized(int start, int end)
+        {
+            var visited = new HashSet<int>();
+            visited.Add(start);
+
+            var queue = new Queue<int>();
+            queue.Enqueue(start);
+
+            while (queue.Count > 0)
+            {
+                start = queue.Dequeue();
+                foreach (var adjacentVertex in _adjacencyList[start])
+                {
+                    if(adjacentVertex == end)
+                    {
+                        return true;
+                    }
+
+                    if (!visited.Contains(adjacentVertex))
+                    {
+                        visited.Add(adjacentVertex);
+                        queue.Enqueue(adjacentVertex);
+                    }
+                }
+            }
+
+            return false;
+        }
+
         public List<int> BreadthFirstSearch(int vertex)
         {
             var traversal = new List<int>();

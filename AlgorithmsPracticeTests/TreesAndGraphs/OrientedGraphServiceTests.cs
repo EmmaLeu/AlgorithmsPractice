@@ -39,5 +39,40 @@ namespace AlgorithmsPracticeTests.TreesAndGraphs
 
             Assert.AreEqual(expectedTraversal, result);
         }
+
+        [Test]
+        public void AreConnected_TrueCase()
+        {
+            var service = new OrientedGrapthService(4);
+            service.AddEdge(2, 0);
+            service.AddEdge(0, 2);
+            service.AddEdge(1, 2);
+            service.AddEdge(0, 1);
+            service.AddEdge(3, 3);
+            service.AddEdge(2, 3);
+
+            var result = service.AreConnected(2, 3);
+            Assert.True(result);
+
+            result = service.AreConnectedOptimized(2, 3);
+            Assert.True(result);
+        }
+
+        [Test]
+        public void AreConnected_FalseCase()
+        {
+            var service = new OrientedGrapthService(4);
+            service.AddEdge(2, 0);
+            service.AddEdge(0, 2);
+            service.AddEdge(1, 2);
+            service.AddEdge(0, 1);
+            service.AddEdge(3, 3);
+
+            var result = service.AreConnected(2, 3);
+            Assert.False(result);
+
+            result = service.AreConnectedOptimized(2, 3);
+            Assert.False(result);
+        }
     }
 }
