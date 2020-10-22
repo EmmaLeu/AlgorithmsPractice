@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AlgorithmsPractice.TreesAndGraphs
+﻿namespace AlgorithmsPractice.TreesAndGraphs
 {
     public class BinaryNode
     {
