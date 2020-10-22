@@ -6,13 +6,24 @@ namespace AlgorithmsPracticeTests.TreesAndGraphs
     public class BinaryTreeServiceTests
     {
         [Test]
-        public void FindFirstCommonAncestor_Test()
+        public void FindFirstCommonAncestor_WithParentLink_Test()
         {
             var testCases = GetTestCases();
             
             foreach(var testCase in testCases)
             {
                 Assert.AreEqual(testCase.FirstCommonAncestor, BinaryTreeService.FindFirstCommonAncestor(testCase.Node1, testCase.Node2));
+            }
+        }
+
+        [Test]
+        public void FindFirstCommonAncestor_WithoutParentLink_Test()
+        {
+            var testCases = GetTestCases();
+
+            foreach (var testCase in testCases)
+            {
+                Assert.AreEqual(testCase.FirstCommonAncestor, BinaryTreeService.FindFirstCommonAncestor(testCase.Root, testCase.Node1, testCase.Node2));
             }
         }
 
@@ -44,6 +55,7 @@ namespace AlgorithmsPracticeTests.TreesAndGraphs
             {
                 new TestCase
                 {
+                    Root = root,
                     Node1 = leftRight,
                     Node2 = right,
                     FirstCommonAncestor = root
@@ -51,6 +63,7 @@ namespace AlgorithmsPracticeTests.TreesAndGraphs
 
                 new TestCase
                 {
+                    Root = root,
                     Node1 = leftLeft,
                     Node2 = leftRight,
                     FirstCommonAncestor = left
@@ -58,6 +71,7 @@ namespace AlgorithmsPracticeTests.TreesAndGraphs
 
                 new TestCase
                 {
+                    Root = root,
                     Node1 = root,
                     Node2 = leftRight,
                     FirstCommonAncestor = root
@@ -67,6 +81,7 @@ namespace AlgorithmsPracticeTests.TreesAndGraphs
 
         private class TestCase
         {
+            public BinaryNodeWithParent Root { get; set; }
             public BinaryNodeWithParent Node1 { get; set; }
             public BinaryNodeWithParent Node2 { get; set; }
             public BinaryNodeWithParent FirstCommonAncestor { get; set; }
