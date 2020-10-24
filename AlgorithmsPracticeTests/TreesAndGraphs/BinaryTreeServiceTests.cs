@@ -86,5 +86,63 @@ namespace AlgorithmsPracticeTests.TreesAndGraphs
             public BinaryNodeWithParent Node2 { get; set; }
             public BinaryNodeWithParent FirstCommonAncestor { get; set; }
         }
+
+        [Test]
+        public void IsSubtreeOf_Test()
+        {
+            foreach (var tc in GetSubTreeTestCases())
+            {
+                Assert.AreEqual(tc.IsSubtreeOf, BinaryTreeService.IsSubtreeOf(tc.FirstTree, tc.SecondTree));
+            }
+        }
+
+        private SubTreeTestCase[] GetSubTreeTestCases()
+        {
+            var firstTree = new BinaryNode(1);
+            var left = new BinaryNode(2);
+            var right = new BinaryNode(3);
+            var leftLeft = new BinaryNode(4);
+            var leftRight = new BinaryNode(5);
+            var rightLeft = new BinaryNode(6);
+            var leftLeftLeft = new BinaryNode(7);
+            var leftLeftRight = new BinaryNode(8);
+
+            firstTree.Left = left;
+            firstTree.Right = right;
+
+            left.Left = leftLeft;
+            left.Right = leftRight;
+
+            leftLeft.Left = leftLeftLeft;
+            leftLeft.Right = leftLeftRight;
+
+            right.Left = rightLeft;
+
+            var someTree = new BinaryNode(9);
+            return new SubTreeTestCase[2]
+            {
+                new SubTreeTestCase
+                {
+                    FirstTree = firstTree,
+                    SecondTree = leftLeft,
+                    IsSubtreeOf = true
+                },
+                new SubTreeTestCase
+                {
+                    FirstTree = firstTree,
+                    SecondTree = someTree,
+                    IsSubtreeOf = false
+                }
+            };
+        }
+
+        private class SubTreeTestCase
+        {
+            public BinaryNode FirstTree { get; set; }
+
+            public BinaryNode SecondTree { get; set; }
+
+            public bool IsSubtreeOf { get; set; }
+        }
     }
 }

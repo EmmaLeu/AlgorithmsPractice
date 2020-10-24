@@ -1,4 +1,8 @@
-﻿namespace AlgorithmsPractice.TreesAndGraphs
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace AlgorithmsPractice.TreesAndGraphs
 {
     public class BinaryTreeService
     {
@@ -117,6 +121,73 @@
             }
 
             return foundNodes + GetContainedNodes(root.Right, node1, node2);
+        }
+
+        public static void InOrder(BinaryNode root, StringBuilder traversal)
+        {
+            if (root == null)
+            {
+                return;
+            }
+
+            if (root.Left != null)
+            {
+                InOrder(root.Left, traversal);
+            }
+
+            traversal.Append(root.Value);
+
+            if (root.Right != null)
+            {
+                InOrder(root.Right, traversal);
+            }
+        }
+
+        public static void PreOrder(BinaryNode root, StringBuilder traversal)
+        {
+            if (root == null)
+            {
+                return;
+            }
+
+            traversal.Append(root.Value);
+
+            if (root.Left != null)
+            {
+                InOrder(root.Left, traversal);
+            }
+
+            if (root.Right != null)
+            {
+                InOrder(root.Right, traversal);
+            }
+        }
+
+        public static bool IsSubtreeOf(BinaryNode t1, BinaryNode t2)
+        {
+            var inorderT2 = new StringBuilder();
+            InOrder(t2, inorderT2);
+
+            var inorderT1 = new StringBuilder();
+            InOrder(t1, inorderT1);
+
+            if(!inorderT1.ToString().Contains(inorderT2.ToString()))
+            {
+                return false;
+            }
+
+            var preorderT2 = new StringBuilder();
+            InOrder(t2, preorderT2);
+
+            var preorderT1 = new StringBuilder();
+            InOrder(t1, preorderT1);
+
+            if (!preorderT1.ToString().Contains(preorderT2.ToString()))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
