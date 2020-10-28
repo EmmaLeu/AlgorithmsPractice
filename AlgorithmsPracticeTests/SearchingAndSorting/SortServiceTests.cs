@@ -31,5 +31,13 @@ namespace AlgorithmsPracticeTests.SearchingAndSorting
             SortService.MergeSortedArrays(a, b, 5, 4);
             Assert.AreEqual(new[] { 1, 2, 3, 4, 19, 20, 21, 29, 30 }, a);
         }
+
+        [Test]
+        public void SortByAnagrams_Test()
+        {
+            var input = new[] { "bad", "a", "dab", "can", "a", "nac" };
+            var actual = SortService.SortByAnagrams(input);
+            Assert.AreEqual(new string[] { "a", "a", "bad", "dab", "can", "nac"}, actual );
+        }
     }
 }

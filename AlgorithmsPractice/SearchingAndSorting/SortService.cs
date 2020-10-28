@@ -1,4 +1,8 @@
-﻿namespace AlgorithmsPractice.SearchingAndSorting
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+
+namespace AlgorithmsPractice.SearchingAndSorting
 {
     public class SortService
     {
@@ -30,6 +34,21 @@
             while(lastBIndex >= 0)
             {
                 a[lastAPosition--] = b[lastBIndex--];
+            }
+        }
+        /// <summary>
+        /// Sort an array of strings so that all the anagrams are next to each other   
+        /// </summary>
+        public static string[] SortByAnagrams(string[] input)
+        {
+            return input.OrderBy(a => a, new AnagramComparer()).ToArray();
+        }
+
+        private class AnagramComparer : IComparer<string>
+        {
+            public int Compare([AllowNull] string x, [AllowNull] string y)
+            {
+                return string.Concat(x.OrderBy(a => a)).CompareTo(string.Concat(y.OrderBy(a => a)));
             }
         }
     }
