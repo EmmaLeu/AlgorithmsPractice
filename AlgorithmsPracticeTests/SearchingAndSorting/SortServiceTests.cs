@@ -8,7 +8,7 @@ namespace AlgorithmsPracticeTests.SearchingAndSorting
         [Test]
         public void MergeArraysTest_Intertwined_Test()
         {
-            var a = new[]{ 1, 7, 10, 15, 19, 0, 0, 0, 0 };
+            var a = new[] { 1, 7, 10, 15, 19, 0, 0, 0, 0 };
             var b = new[] { 2, 8, 20, 21 };
             SortService.MergeSortedArrays(a, b, 5, 4);
             Assert.AreEqual(new[] { 1, 2, 7, 8, 10, 15, 19, 20, 21 }, a);
@@ -37,7 +37,27 @@ namespace AlgorithmsPracticeTests.SearchingAndSorting
         {
             var input = new[] { "bad", "a", "dab", "can", "a", "nac" };
             var actual = SortService.SortByAnagrams(input);
-            Assert.AreEqual(new string[] { "a", "a", "bad", "dab", "can", "nac"}, actual );
+            Assert.AreEqual(new string[] { "a", "a", "bad", "dab", "can", "nac" }, actual);
+        }
+
+        [Test]
+        public void FindElementInSortedRotatedArray_Found_Test()
+        {
+            var input = new[] { 15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14 };
+
+            var index = SortService.FindElementInSortedRotatedArray(input, 5);
+
+            Assert.AreEqual(8, index);
+        }
+
+        [Test]
+        public void FindElementInSortedRotatedArray_NotFound_Test()
+        {
+            var input = new[] { 15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14 };
+
+            var index = SortService.FindElementInSortedRotatedArray(input, 111);
+
+            Assert.AreEqual(-1, index);
         }
     }
 }

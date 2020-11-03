@@ -36,6 +36,7 @@ namespace AlgorithmsPractice.SearchingAndSorting
                 a[lastAPosition--] = b[lastBIndex--];
             }
         }
+
         /// <summary>
         /// Sort an array of strings so that all the anagrams are next to each other   
         /// </summary>
@@ -50,6 +51,60 @@ namespace AlgorithmsPractice.SearchingAndSorting
             {
                 return string.Concat(x.OrderBy(a => a)).CompareTo(string.Concat(y.OrderBy(a => a)));
             }
+        }
+
+        /// <summary>
+        /// Given a sorted array of n integers that has been rotated an unknown number of times, 
+        /// give an O(log n) algorithm that finds an element in the array   
+        /// You may assume that the array was originally sorted in increasing order 
+        /// </summary>
+        /// <param name="input">The input array</param>
+        /// <param name="element">Searched element/param>
+        /// <returns></returns>
+        public static int FindElementInSortedRotatedArray(int[] input, int element)
+        {
+            return FindElement(input, 0, input.Length - 1, element);
+        }
+
+        private static int FindElement(int[] input, int left, int right, int element)
+        {
+            while (left < right)
+            {
+                var middle = (left + right) / 2;
+                if (element == input[middle])
+                {
+                    return middle;
+                }
+                else if (input[left] <= input[middle])
+                {
+                    if (element > input[middle])
+                    {
+                        left = middle + 1;
+                    }
+                    else if (element >= input[left])
+                    {
+                        right = middle - 1;
+                    }
+                    else
+                    {
+                        left = middle + 1;
+                    }
+                }
+                else if (element < input[middle])
+                {
+                    right = middle - 1;
+                }
+                else if (element <= input[right])
+                {
+                    left = middle + 1;
+                }
+                else
+                {
+                    right = middle - 1;
+                }
+            }
+
+            return -1;
         }
     }
 }
