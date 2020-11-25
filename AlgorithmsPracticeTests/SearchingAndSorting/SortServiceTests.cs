@@ -59,5 +59,33 @@ namespace AlgorithmsPracticeTests.SearchingAndSorting
 
             Assert.AreEqual(-1, index);
         }
+
+        [Test]
+        public void SearchString_InSortedStringArray_Found_STest()
+        {
+            var input = new[] { "bla", "", "car", "", "", "forest", "","" };
+
+            var index = SortService.Search(input, "bla");
+
+            Assert.AreEqual(0, index);
+
+            index = SortService.Search(input, "car");
+
+            Assert.AreEqual(2, index);
+
+            index = SortService.Search(input, "");
+
+            Assert.AreEqual(1, index);
+        }
+
+        [Test]
+        public void SearchString_InSortedStringArray_NotFound_STest()
+        {
+            var input = new[] { "bla", "", "car", "", "", "forest", "", "" };
+
+            var index = SortService.Search(input, "zus");
+
+            Assert.AreEqual(-1, index);
+        }
     }
 }

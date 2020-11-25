@@ -54,6 +54,61 @@ namespace AlgorithmsPractice.SearchingAndSorting
         }
 
         /// <summary>
+        /// Given a sorted array of strings which is interspersed with empty strings, write a method to find the location of a given string.
+        /// </summary>
+        /// <param name="values"></param>
+        public static int Search(string[] values, string str)
+        {
+            if(values == null || !values.Any() || str == null)
+            {
+                return -1;
+            }
+
+            if(str == string.Empty)
+            {
+                for(var index = 0; index < values.Length; index++)
+                {
+                    if(values[index] == string.Empty)
+                    {
+                        return index;
+                    }
+                }
+
+                return -1;
+            }
+
+            return BinarySkipEmptySearch(values, str, 0, values.Length - 1);
+        }
+
+        public static int BinarySkipEmptySearch(string[] values, string str, int left, int right)
+        {
+            if(left > right)
+            {
+                return -1;
+            }
+
+            var middle = (left + right) / 2;
+
+            while(middle < values.Length && values[middle] == string.Empty)
+            {
+                middle++;
+            }
+
+            if(middle == values.Length || string.Compare(str, values[middle]) < 0)
+            {
+                return BinarySkipEmptySearch(values, str, left, middle - 1);
+            }
+            if(values[middle] == str)
+            {
+                return middle;
+            }
+            else
+            {
+                return BinarySkipEmptySearch(values, str, middle + 1, right);
+            }
+        }
+
+        /// <summary>
         /// Given a sorted array of n integers that has been rotated an unknown number of times, 
         /// give an O(log n) algorithm that finds an element in the array   
         /// You may assume that the array was originally sorted in increasing order 
